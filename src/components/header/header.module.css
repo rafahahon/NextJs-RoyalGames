@@ -1,0 +1,31 @@
+#header {
+    height: 10vh;
+    background-color: var(--cinza);
+    /* background-image: linear-gradient(rgba(34,28,45,5), rgba(34,28,45,1)); */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#nav_menu {
+    display: flex;
+    gap: 40px;
+}
+
+#nav_menu a {
+    text-decoration: none;
+    color: var(--branco);
+    font-weight: 400;
+    font-size: 18px;
+}
+
+#nav_menu a:hover {
+    color: var(--rosa-destaque)
+}
+
+#logo {
+    width: 200px;
+}

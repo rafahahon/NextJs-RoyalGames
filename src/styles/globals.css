@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: var(--font-titulo);
+  font-family: var(--font-padrao);
+}
+
+:root {
+  --escuro: #0B0616;
+  --cinza: #221C2D;
+  --rosa-destaque: #FF004C;
+  --roxo: #7A3BFF;
+  --branco: #FFF;
+  --cinza-claro: #D6D2E6;
+
+  --tamanho-titulo: 50px;
+  --tamanho-texto-btn: 17px;
+}
+
+.layout_guide {
+  width: 80%;
+}
