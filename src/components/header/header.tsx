@@ -5,10 +5,12 @@ const Header = () => {
     return (
         <header id={styles.header}>
             <div className={`${styles.container} layout_guide`}>
-                <img src="../logoheader.svg" alt="Logo rosa escrito Royal Games" id={styles.logo}/>
+                <img src="../logoheader.svg" alt="Logo rosa escrito Royal Games." id={styles.logo} />
                 <nav id={styles.nav_menu}>
                     <a href="#catalogo">Catálogo</a>
-                    <Link href="/login">Login</Link>
+                    <Link href="/login">
+                        <button id={styles.botao}>Login</button>
+                    </Link>
                 </nav>
             </div>
         </header>

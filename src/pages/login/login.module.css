@@ -1,0 +1,41 @@
+#main {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    background: linear-gradient(270deg, #221C2D 44.71%, #282047 100%);
+}
+
+#imagem_mulher {
+    height: 90%;
+    display: flex;
+    align-self: flex-end;
+    margin: 0px 170px 0px;
+}
+
+#campo_login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: thin solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    height: 80%;
+    width: 60%;
+    margin: 100px 0px 0px 180px;
+    box-shadow: inset 4px 4px 15px rgba(0,0,0, 0.4),
+    inset -2px -2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.campo_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: var(--cinza-claro);
+}
+
+/* .campo_form label {
+    display: flex;
+    justify-self: start;
+    
+} */

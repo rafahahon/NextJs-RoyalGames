@@ -1,0 +1,29 @@
+#footer {
+    height: 20vh;
+    background: linear-gradient(0deg, #221C2D 0%, rgba(34, 28, 45, 0) 100%);
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contato {
+    color: var(--branco);
+    flex-direction: column;
+    text-align: end;
+    font-size: 15x;
+}
+
+.lista_contato {
+    list-style: none;
+     line-height: 2.2;
+}
+
+#logo {
+    height: 110;
+    opacity: 1;
+}

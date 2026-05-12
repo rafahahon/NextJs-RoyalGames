@@ -1,7 +1,9 @@
 #header {
-    height: 10vh;
-    background-color: var(--cinza);
+    height: 12vh;
+    background: linear-gradient(180deg, #221C2D 0%, rgba(34, 28, 45, 0) 100%);
     /* background-image: linear-gradient(rgba(34,28,45,5), rgba(34,28,45,1)); */
+    display: flex;
+    justify-content: center;
 }
 
 .container {
@@ -12,14 +14,31 @@
 
 #nav_menu {
     display: flex;
-    gap: 40px;
+    gap: 60px;
+    align-items: center;
 }
 
 #nav_menu a {
     text-decoration: none;
     color: var(--branco);
     font-weight: 400;
-    font-size: 18px;
+    font-size: 20px;
+}
+
+#botao {
+    color: var(--branco);
+    background-color: transparent;
+    border: 1px solid var(--rosa-destaque);
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+#botao:hover {
+    color: var(--rosa-destaque);
+    border: 1px, solid, var(--branco);
 }
 
 #nav_menu a:hover {
@@ -27,5 +46,10 @@
 }
 
 #logo {
-    width: 200px;
+    width: 214;
+    height: 79;
+    opacity: 1;
+    top: 36px;
+    left: 100px;
+
 }
