@@ -14,14 +14,16 @@ const DetalheJogo = () => {
                             <hr id={styles.linha}></hr>
                         </div>
                         <div className={styles.detalhes_info}>
-                            <figure className={styles.card_detalhes_imagem} >
+                            <figure className={styles.card_jogo_imagem} >
                                 <img src="../imgjogo.png" alt="Imagem do jogo selecionado pelo usuário" />
                             </figure>
-                            <h2>League of Legends</h2>
-                            <p>
-                                League of Legends (LoL) é um jogo eletrônico do gênero MOBA (Multiplayer Online Battle Arena) onde duas equipes de cinco jogadores competem entre si com o objetivo de destruir a base adversária. Cada jogador controla um campeão com habilidades únicas, exigindo estratégia, trabalho em equipe e tomada de decisões rápidas durante as partidas.
-                                O jogo possui diversos modos, mapas e estilos de jogo, além de oferecer atualizações frequentes com novos personagens, eventos e ajustes de balanceamento. League of Legends é conhecido pelo seu cenário competitivo mundial, reunindo milhões de jogadores e campeonatos profissionais ao redor do mundo.
-                            </p>
+                            <div className={styles.card_detalhes_texto}>
+                                <h2>League of Legends</h2>
+                                <p>
+                                    League of Legends (LoL) é um jogo eletrônico do gênero MOBA (Multiplayer Online Battle Arena) onde duas equipes de cinco jogadores competem entre si com o objetivo de destruir a base adversária. Cada jogador controla um campeão com habilidades únicas, exigindo estratégia, trabalho em equipe e tomada de decisões rápidas durante as partidas.
+                                    O jogo possui diversos modos, mapas e estilos de jogo, além de oferecer atualizações frequentes com novos personagens, eventos e ajustes de balanceamento. League of Legends é conhecido pelo seu cenário competitivo mundial, reunindo milhões de jogadores e campeonatos profissionais ao redor do mundo.
+                                </p>
+                            </div>
                         </div>
                         <div className={styles.card_detalhes_infos}>
 
@@ -40,7 +42,7 @@ const DetalheJogo = () => {
                                     </p>
                                 </div>
                                 <div className={styles.campo}>
-                                    <h2 className={styles.campo_titulo}>Plataformas:</h2>
+                                    <h2 className={styles.campo_titulo}>Plataformas: </h2>
                                     <p className={styles.campo_valor}>
                                         Xbox e PC
                                     </p>
