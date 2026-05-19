@@ -1,0 +1,56 @@
+.container_lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .pesquisa_jogo {
+    display: flex;
+    margin: 20px;
+    
+} */
+
+.input_pesquisa,
+.pesquisa_jogo button,
+.pesquisa_jogo select {
+    background: rgba(214, 210, 230, 0.2);
+    color: var(--branco);
+    font-size: 1rem;
+    text-align: start;
+    border-radius: 6px;
+    padding: 0px 10px;
+    margin: 5px;
+}
+
+.input_pesquisa{
+    width: 400px;
+    height: 35px;
+}
+
+.pesquisa_jogo button,
+.pesquisa_jogo select {
+    width: 150px;
+    height: 35px;
+    
+}
+
+/* .botoes_pagina {
+    
+} */
+
+.botoes_pagina button {
+    background-color: transparent;
+    border: 1px solid var(--rosa-destaque);
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--branco);
+    padding: 5px;
+    margin: 10px;
+    width: 40;
+    height: 30px;
+}
+
+.botoes_pagina img{
+    width: 12px;
+    height: 12px;
+}

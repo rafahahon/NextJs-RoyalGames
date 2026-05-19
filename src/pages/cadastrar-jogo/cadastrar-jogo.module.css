@@ -1,0 +1,77 @@
+.main_jogo {
+    background: linear-gradient(270deg, #221C2D 44.71%, #282047 100%);
+
+}
+
+.container_banner {
+    border: 2px solid white;
+    height: 40vh;
+    margin: 20px;
+    padding: 50px;
+    top: 180px;
+    left: 111px;
+    border-radius: 6px;
+    opacity: 1;
+
+}
+
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+
+.texto_banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+
+.titulo_banner,
+.titulo_lista {
+    font-family: var(--font-titulo);
+    color: rgba(214, 210, 230, 1);
+    font-weight: 500;
+    margin: 0px 0px 3px 0px;
+
+}
+
+.linha {
+    border: none;
+    height: 1px;
+    background-color: var(--rosa-destaque);
+    width: 24%
+}
+
+.formulario_jogo input {
+    background: rgba(214, 210, 230, 0.2);
+    color: var(--branco);
+    font-size: 1rem;
+    text-align: start;
+    border-radius: 6px;
+    padding: 0px 10px;
+    margin: 5px;
+}
+
+
+.botao_cadastrar {
+    color: var(--branco);
+    background-color: transparent;
+    border: 1px solid var(--rosa-destaque);
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 6px;
+}
+
+.botao_cadastrar:hover {
+    color: var(--rosa-destaque);
+    border: 1px, solid, var(--branco);
+}
+
+.titulo_lista {
+    font-size: 1.4rem;
+}

@@ -1,0 +1,15 @@
+.botao {
+    color: var(--cinza-claro);
+    background-color: transparent;
+    border: 1px solid var(--rosa-destaque);
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 6px;
+}
+
+.botao:hover {
+    color: var(--rosa-destaque);
+    border: 1px, solid, var(--cinza-claro);
+}

@@ -1,7 +1,6 @@
 import Header from "@/components/header/header";
 import styles from "./cadastrar-jogo.module.css";
 import Footer from "@/components/footer/footer";
-import CardJogo from "@/components/card-jogo/card-jogo";
 import ListaJogo from "@/components/lista-jogo/lista-jogo";
 
 const CadastrarJogo = () => {

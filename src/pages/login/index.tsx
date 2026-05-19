@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./login.module.css"
-import { useRouter } from "next/router";
-import { ToastContainer, toast } from "react-toastify";
+import { useRouter } from "next/router";;
 import { login } from "../api/authService";
+import { erro, notificacao } from "@/utils/toast";
 
 const Login = () => {
 
@@ -10,8 +10,6 @@ const Login = () => {
     const [senha, setSenha] = useState<string>("");
 
     const router = useRouter();
-    const notificacao = (msg: string) => toast.success(msg);
-    const erro = (msg: string) => toast.error(msg);
 
     async function autenticar(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -20,10 +18,10 @@ const Login = () => {
             notificacao("Bem-vindo(a)!")
 
             setTimeout(() => {
-                router.push("/home");
+                router.push("/cadastrar-jogo");
             }, 2000)
         } catch (error: any) {
-            alert(error.message);
+            erro("E-mail ou senha inválidos.");
         }
     }
 

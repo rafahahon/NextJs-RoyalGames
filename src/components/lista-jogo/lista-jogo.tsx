@@ -1,18 +1,91 @@
-import CardJogo from "../card-jogo/card-jogo";
+import Link from "next/link";
 import styles from "./lista-jogo.module.css";
+import { useEffect, useState } from "react";
+import CardJogo from "../card-jogo/card-jogo";
+import { excluirJogo, listarJogo } from "@/pages/api/jogoService";
+import { notificacao, toastConfirmarDelete } from "@/utils/toast";
+import { verificarAutenticacao } from "@/utils/auth"
+
+interface Jogo {
+    jogoID: number,
+    nome: string,
+    preco: number,
+    imagemUrl: string,
+    statusJogo: boolean
+}
 
 const ListaJogo = () => {
+
+    const [jogos, setJogos] = useState<Jogo[]>([]);
+    const [ordem, setOrdem] = useState("todos");
+    const [pesquisa, setPesquisa] = useState("");
+    const [estaAutenticado, setEstaAutenticado] = useState(false);
+
+    async function listar() {
+        try {
+            const lista = await listarJogo();
+            setJogos(lista);
+        } catch (error: any) {
+            console.log(error.message)
+        }
+    }
+
+    function confirmarExclusao(jogoId: number) {
+        toastConfirmarDelete(async () => {
+            try {
+                await excluirJogo(jogoId);
+                setJogos((ListaAtual) =>
+                    ListaAtual.map((jogo) =>
+                        jogo.jogoID === jogoId
+                            ? { ...jogo, statusJogo: false }
+                            : jogo
+                    )
+                )
+                notificacao("Jogo inativado!")
+                listar();
+            } catch (error: any) {
+                error(error.message)
+            }
+        })
+    }
+
+    useEffect(() => {
+        setEstaAutenticado(verificarAutenticacao());
+        listar();
+    }, [])
+
+    const jogosFiltrados = jogos.filter((jogo) => jogo.nome.toLowerCase().includes(pesquisa.toLowerCase()))
+        .sort((a, b) => {
+            if (ordem === "menorPreco") {
+                return a.preco - b.preco;
+            }
+
+            return a.jogoID - b.jogoID;
+        });
+
     return (
-        <div className={`${styles.container_lista} layout_guide`}>
+        <div className={styles.container_lista}>
             <div className={styles.pesquisa_jogo}>
-                <input className={styles.input_pesquisa} type="text" placeholder="Pesquise..." />
-                <button>Menor preço</button>
-                <select className={styles.genero}>
-                    <option>Gêneros</option>
+                <input className={styles.input_pesquisa} type="text" placeholder="Pesquise..." value={pesquisa} onChange={(e) => setPesquisa(e.target.value)}/>
+                <button value={ordem} onChange={(e) => setOrdem(e.target.value)}>Menor preço</button>
+                <select className={styles.filtro}>
+                    <option>Gênero</option>
                 </select>
             </div>
             <div className={styles.lista_jogo}>
-                <CardJogo></CardJogo>
+                {jogosFiltrados.length > 0 ? jogosFiltrados.map((jogo) => (
+                    <CardJogo
+                        key={jogo.jogoID}
+                        jogoId={jogo.jogoID}
+                        nome={jogo.nome}
+                        preco={jogo.preco}
+                        img={jogo.imagemUrl}
+                        onDelete={confirmarExclusao}
+                        estaAutenticado={estaAutenticado}
+                    />
+                )) : (
+                    <p>Carregando jogo...</p>
+                )}
             </div>
             <div className={styles.botoes_pagina}>
 
@@ -23,7 +96,7 @@ const ListaJogo = () => {
                 <button> 4 </button>
                 <button> 5 </button>
                 <button> <img src="./setadireita.svg" alt="Seta direita" /> </button>
-                
+
             </div>
         </div>
     )
