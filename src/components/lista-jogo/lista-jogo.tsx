@@ -10,7 +10,11 @@ interface Jogo {
     jogoID: number,
     nome: string,
     preco: number,
-    imagemUrl: string,
+    genero: string;
+    classificacao: string;
+    plataforma: string;
+    imagemUrl: string;
+    descricao: string;
     statusJogo: boolean
 }
 
@@ -66,7 +70,7 @@ const ListaJogo = () => {
     return (
         <div className={styles.container_lista}>
             <div className={styles.pesquisa_jogo}>
-                <input className={styles.input_pesquisa} type="text" placeholder="Pesquise..." value={pesquisa} onChange={(e) => setPesquisa(e.target.value)}/>
+                <input className={styles.input_pesquisa} type="text" placeholder="Pesquise..." value={pesquisa} onChange={(e) => setPesquisa(e.target.value)} />
                 <button value={ordem} onChange={(e) => setOrdem(e.target.value)}>Menor preço</button>
                 <select className={styles.filtro}>
                     <option>Gênero</option>
@@ -76,12 +80,11 @@ const ListaJogo = () => {
                 {jogosFiltrados.length > 0 ? jogosFiltrados.map((jogo) => (
                     <CardJogo
                         key={jogo.jogoID}
-                        jogoId={jogo.jogoID}
+                        jogoID={jogo.jogoID}
                         nome={jogo.nome}
                         preco={jogo.preco}
-                        img={jogo.imagemUrl}
+                        imagemUrl={jogo.imagemUrl}
                         onDelete={confirmarExclusao}
-                        estaAutenticado={estaAutenticado}
                     />
                 )) : (
                     <p>Carregando jogo...</p>
