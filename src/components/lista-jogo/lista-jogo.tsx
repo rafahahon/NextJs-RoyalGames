@@ -18,7 +18,11 @@ interface Jogo {
     statusJogo: boolean
 }
 
-const ListaJogo = () => {
+type CatalogoProps = {
+    editar: boolean
+}
+
+const ListaJogo = ({editar}:CatalogoProps) => {
 
     const [jogos, setJogos] = useState<Jogo[]>([]);
     const [ordem, setOrdem] = useState("todos");
@@ -80,10 +84,8 @@ const ListaJogo = () => {
                 {jogosFiltrados.length > 0 ? jogosFiltrados.map((jogo) => (
                     <CardJogo
                         key={jogo.jogoID}
-                        jogoID={jogo.jogoID}
-                        nome={jogo.nome}
-                        preco={jogo.preco}
-                        imagemUrl={jogo.imagemUrl}
+                        jogo={jogo}
+                        editar={editar}
                         onDelete={confirmarExclusao}
                     />
                 )) : (

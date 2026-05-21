@@ -12,13 +12,19 @@
     /* border: 5px solid var(--branco); */
 }
 
-/* .card_detalhes {
+.cabecalho {
+    color: var(--cinza-claro);
+    font-family: var(--font-titulo);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-} */
+    justify-content: center;
+}
+
+.cabecalho hr {
+    color: var(--rosa-destaque);
+}
 
 .detalhes_info {
+    
     display: flex;
     flex-direction: row;
 }
@@ -31,4 +37,8 @@
 
 .campo {
     white-space: nowrap;
+}
+
+.campo_valor {
+    color: beige;
 }

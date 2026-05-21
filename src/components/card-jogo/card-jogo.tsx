@@ -9,17 +9,23 @@ type Jogo = {
     nome: string;
     preco: number;
     imagemUrl: string;
-    onDelete: (jogoID: number) => void;
 }
 
-const CardJogo = ({ jogoID, nome, preco, imagemUrl, onDelete}: Jogo) => {
+type CardJogoProps = {
+    jogo: Jogo,
+    onDelete: (jogoID: number) => void;
+    editar: boolean,
+}
+
+const CardJogo = ({editar, jogo, onDelete}:CardJogoProps) => {
     return (
         <article className={styles.card_jogo}>
-            <img src={imagemUrl} alt="Jogo vendido pela loja." className={styles.img_jogo} />
-            <h3 className={styles.titulo_jogo}>{nome}</h3>
-            <p className={styles.valor_jogo}>{formatarPreco(preco)}</p>
+            <img src={jogo.imagemUrl} alt="Jogo vendido pela loja." className={styles.img_jogo} />
+            <h3 className={styles.titulo_jogo}>{jogo.nome}</h3>
+            <p className={styles.valor_jogo}>{formatarPreco(jogo.preco)}</p>
             {/* talvez aqui precise de uma div */}
-            <Link href={"/detalhe-jogo/"} className={styles.link_detalhe}>Detalhes</Link>
+            {editar ? <Link href={`/detalhe-jogo/${jogo.jogoID}`} className={styles.link_detalhe}>Confirmar</Link> : <Link href={`/detalhe-jogo/${jogo.jogoID}`} className={styles.link_detalhe}>Detalhes</Link>}
+            
             
         </article>
     )

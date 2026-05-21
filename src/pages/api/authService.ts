@@ -12,3 +12,17 @@ export async function login(email: string, senha: string) {
         throw new Error("E-mail ou senha inválidos")
     }
 }
+
+export async function estaLogado() {
+    const token = secureLocalStorage.getItem("Token")
+
+    if(token != null){
+        return true;
+    }else {
+        return false;
+    }
+}
+
+export async function logout() {
+    secureLocalStorage.removeItem("Token");
+}

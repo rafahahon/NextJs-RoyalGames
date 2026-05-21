@@ -1,37 +1,36 @@
-import { profileEnd } from "console";
 import { api } from "./api";
 
 type JogoForm = {
     nome: string,
-    valor: string,
+    preco: string,
     descricao: string,
     imagem: File | null,
     generoIds: number[],
     plataformaIds: number[],
-    classificacaoId: number
+    classificacaoIndicativaId: number
 }
 
 interface JogoListagem {
     nome: string,
-    preco: number,
+    preco: string,
     descricao: string,
     imagemUrl?: string,
     statusJogo: boolean,
-    generoIds: number[],
-    plataformaIds: number[],
-    classificacaoID: number
+    generos: number[],
+    plataformas: number[],
+    classificacaoNome: string[],
 }
 
 export async function cadastrarJogo(dados: JogoForm) {
     try {
         const formData = new FormData();
         formData.append("nome", dados.nome);
-        formData.append("preco", dados.valor);
+        formData.append("preco", dados.preco);
         formData.append("descricao", dados.descricao);
         if (dados.imagem) {
             formData.append("imagem", dados.imagem)
         }
-        formData.append("classificacaoId", dados.classificacaoId.toString());
+        formData.append("classificacaoId", dados.classificacaoIndicativaId.toString());
 
         dados.generoIds.forEach((id) => {
             formData.append("generoIds", id.toString());
@@ -83,7 +82,7 @@ export async function listarPorId(id: number) {
 
 export async function excluirJogo(jogoId: number) {
     try {
-        await api.delete("Produto/" + jogoId)
+        await api.delete("Jogo/" + jogoId)
     } catch (error: any) {
         throw new Error(error.response.data)
     }
@@ -94,13 +93,13 @@ export async function editarJogo(jogoId: number, dados: JogoForm) {
         const formData = new FormData();
 
         formData.append("nome", dados.nome);
-        formData.append("preco", dados.valor);
+        formData.append("preco", dados.preco);
         formData.append("descricao", dados.descricao);
         if (dados.imagem) {
             formData.append("imagem", dados.imagem)
         }
 
-        formData.append("classificacaoId", dados.classificacaoId.toString());
+        formData.append("classificacaoIndicativaId", dados.classificacaoIndicativaId.toString());
 
         dados.generoIds.forEach((id) => {
             formData.append("generoIds", id.toString());
