@@ -1,15 +1,16 @@
 import Header from "@/components/header/header";
-import styles from "./cadastrar-jogo.module.css";
+import styles from "./jogo.module.css";
 import Footer from "@/components/footer/footer";
 import ListaJogo from "@/components/lista-jogo/lista-jogo";
 import { notificacao } from "@/utils/toast";
-import { listarPorId } from "../api/jogoService";
+import { editarJogo, listarPorId } from "../api/jogoService";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { listarPlataforma } from "../api/plataformaService";
 import { listarClassificacao } from "../api/classificacaoService";
 import { listarGenero } from "../api/generoService";
 import { cadastrarJogo } from "../api/jogoService";
+import { verificarAutenticacao } from "@/utils/auth";
 
 interface Genero {
     generoID: number;
@@ -26,8 +27,9 @@ interface Plataforma {
     nome: string;
 }
 
-const CadastrarJogo = () => {
+const Jogo = () => {
 
+    const [jogoId, setJogoId] = useState<number>();
     const [nome, setNome] = useState<string>("");
     const [preco, setPreco] = useState<string>("");
     const [descricao, setDescricao] = useState<string>("");
@@ -40,8 +42,11 @@ const CadastrarJogo = () => {
     const [plataformaSelecionada, setPlataformaSelecionada] = useState<number[]>([]);
     const [estaAutenticado, setEstaAutenticado] = useState(false);
 
+    const [editar, setEditar] = useState<boolean>(false);
+
     const router = useRouter();
     const id = router.query.id;
+    // let telaEditar = id ? true : false;
 
     async function listarGeneroEmJogo() {
         const lista = await listarGenero()
@@ -75,7 +80,7 @@ const CadastrarJogo = () => {
     async function SalvarJogo(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            const dadosCadastro = {
+            const dados = {
                 nome,
                 preco,
                 descricao,
@@ -85,14 +90,14 @@ const CadastrarJogo = () => {
                 classificacaoIndicativaId: classificacaoSelecionada
             }
 
-            console.log(dadosCadastro);
+            if(jogoId == null) {
+                await cadastrarJogo(dados);
+                notificacao("Jogo cadastrado!")
+            } else {
+                await editarJogo(jogoId!, dados)
 
-            await cadastrarJogo(dadosCadastro);
-            notificacao("Jogo cadastrado!");
-
-            setTimeout(() => {
-                router.push("/home")
-            }, 2000)
+                notificacao("Atualizações concluídas!");
+            }
 
         } catch (error: any) {
             console.log(error.message)
@@ -100,9 +105,30 @@ const CadastrarJogo = () => {
 
     }
 
+    async function editarJo(jogo: any) {
+        setNome(jogo.nome);
+        setPreco(jogo.preco);
+        setDescricao(jogo.descricao);
+        setGeneroSelecionado(jogo.generoIds);
+        setPlataformaSelecionada(jogo.plataformaIds);
+        setClassificacaoSelecionada(jogo.classificacaoID);
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        })
+    }
+
     useEffect(() => {
 
         if (!router.isReady) return;
+
+        if (!verificarAutenticacao()) {
+            router.push("/home");
+            return;
+        }
+
+        setEstaAutenticado(true);
 
         listarGeneroEmJogo()
         listarClassificacaoEmJogo()
@@ -110,17 +136,19 @@ const CadastrarJogo = () => {
         listarJogo()
     }, [router.isReady, id]);
 
-
+    if (!estaAutenticado) {
+        return null;
+    }
 
     return (
         <>
-            <Header />
-            <main>
+            <main className={styles.main_jogo}>
+                <Header />
 
                 <section className={styles.banner}>
                     <div className={`${styles.container_banner} layout_guide`}>
                         <div className={styles.texto_banner}>
-                            <h1>Cadastrar novo jogo</h1>
+                            <h1>{editar ? "Editar jogo" : "Cadastrar novo jogo"}</h1>
                             <hr className={styles.linha} />
                         </div>
 
@@ -136,7 +164,7 @@ const CadastrarJogo = () => {
                                     <div className={`${styles.campo_texto}`}>
                                         <label htmlFor="">Valor</label>
                                         <input type="number" name="preco" id="preco" value={preco}
-                                            onChange={(e) => setPreco(e.target.value)} />
+                                            onChange={e => setPreco(e.target.value)} />
                                     </div>
 
                                     <div className={styles.campo_texto}>
@@ -145,7 +173,7 @@ const CadastrarJogo = () => {
                                             value={generoSelecionado.map(String)}
                                             onChange={(e) => {
                                                 setGeneroSelecionado(
-                                                    Array.from(e.target.selectedOptions).map(option => Number(option.value))
+                                                    Array.from(e.target.selectedOptions).map((option) => Number(option.value))
                                                 )
                                             }}
                                         >
@@ -164,14 +192,14 @@ const CadastrarJogo = () => {
                                                 setClassificacaoSelecionada(Number(e.target.value))
                                             }}>
 
-                                            <option value="0" disabled selected>Ex: Livre</option>
+                                            <option value="0" disabled defaultValue={0}>Ex: Livre</option>
 
                                             {classificacao.map((item) => (
                                                 <option value={item.classificacaoID} key={item.classificacaoID}>
                                                     {item.nome}
                                                 </option>
                                             ))}
-                                            </select>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -211,22 +239,26 @@ const CadastrarJogo = () => {
                                 </div>
                             </div>
 
-                            <button className={styles.botao_cadastrar}>Cadastrar</button>
+                            <button className={styles.botao_cadastrar}>{ editar ? "Salvar": "Cadastrar"}</button>
                         </form>
                     </div>
                 </section >
 
-                <section className={styles.lista_jogo}>
+                <section className={styles.lista_jogo} id="catalogo">
                     <div className={`${styles.container_lista_jogo} layout_guide`}>
                         <h1>Lista de jogos</h1>
                         <hr />
                     </div>
-                        <ListaJogo editar={true} />
+                    <ListaJogo editar={true} onEdit={
+                        (jogo) => {
+                            editarJo(jogo)
+                        }
+                    } />
                 </section>
+                <Footer />
             </main >
-            <Footer />
         </>
     )
 }
 
-export default CadastrarJogo;
+export default Jogo;

@@ -3,6 +3,7 @@ import styles from "./login.module.css"
 import { useRouter } from "next/router";;
 import { login } from "../api/authService";
 import { erro, notificacao } from "@/utils/toast";
+import Link from "next/link";
 
 const Login = () => {
 
@@ -18,7 +19,7 @@ const Login = () => {
             notificacao("Bem-vindo(a)!")
 
             setTimeout(() => {
-                router.push("/cadastrar-jogo");
+                router.push("/jogo");
             }, 2000)
         } catch (error: any) {
             erro("E-mail ou senha inválidos.");
@@ -32,7 +33,10 @@ const Login = () => {
             <main id={styles.main}>
                 <img src="../mulherlogin.svg" alt="Imagem de uma mulher cibernética." id={styles.imagem_mulher} />
                 <div id={styles.campo_login}>
-                    <img src="./logologin.svg" alt="Logo rosa escrito Royal Games." id={styles.logo} />
+
+                    <Link href="/home">
+                        <img src="./logologin.svg" alt="Logo rosa escrito Royal Games." id={styles.logo} />
+                    </Link>
                     <form id={styles.formulario} onSubmit={autenticar}>
                         <div className={styles.campo_form}>
                             <label htmlFor="email">Email</label>

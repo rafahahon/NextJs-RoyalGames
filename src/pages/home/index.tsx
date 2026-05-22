@@ -21,7 +21,7 @@ const Home = () => {
                     </div>
                 </section>
 
-                <section id={styles.catalogo}>
+                <section className={styles.catalogo} id="catalogo">
                     <div className={`${styles.container_catalogo} layout_guide`}>
                         {/* catálogo de jogos :D */}
                         <h1>Catálogo de jogos</h1>

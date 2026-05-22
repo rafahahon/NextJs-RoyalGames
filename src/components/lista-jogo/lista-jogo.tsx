@@ -19,10 +19,11 @@ interface Jogo {
 }
 
 type CatalogoProps = {
-    editar: boolean
+    editar: boolean;
+    onEdit?: (jogo: Jogo) => void
 }
 
-const ListaJogo = ({editar}:CatalogoProps) => {
+const ListaJogo = ({editar, onEdit}:CatalogoProps) => {
 
     const [jogos, setJogos] = useState<Jogo[]>([]);
     const [ordem, setOrdem] = useState("todos");
@@ -87,9 +88,10 @@ const ListaJogo = ({editar}:CatalogoProps) => {
                         jogo={jogo}
                         editar={editar}
                         onDelete={confirmarExclusao}
+                        onEdit={onEdit}
                     />
                 )) : (
-                    <p>Carregando jogo...</p>
+                    <p>Carregando lista de jogos...</p>
                 )}
             </div>
             <div className={styles.botoes_pagina}>
